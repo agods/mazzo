@@ -6,7 +6,7 @@ class DesignApplicationsController < ApplicationController
   def show
   	@design_application = DesignApplication.find(params[:id])
     @comment = Comment.new(parent_id: params[:parent_id], design_application_id: @design_application.id)
-    @comments = Comment.all
+    @comments = Comment.where(design_application: @design_application).hash_tree
   end
 
   def new
