@@ -48,27 +48,10 @@
 	<%= link_to "Download", @design_application.drawing.url(:original, false) %>
 </p>
 
+
+<%= comments_tree_for @comments %>
+
+<hr />
+
 <h1>New comment</h1>
- 
-<% if @comment.parent %>
-  <%= render 'comments/form', comment: @comment.parent, from_reply_form: true %>
-<% end %>
- 
 <%= render 'comments/form' %>
-
-<%= @design_application.comments.count %>
-
-<table class="table table-bordered">
-  <tr>
-    <th>Title</th>
-    <th>Comment</th>
-    <th>Reply</th>
-  </tr>
-  <% @design_application.comments.each do |comments| %>
-  <tr>
-    <td><%= comments.title %></td>
-    <td><%= comments.body %></td>
-    <td><%= link_to 'reply', new_comment_path(:design_application_id => @design_application.id) %></td>
-  </tr>
-  <% end %>
-</table>

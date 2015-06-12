@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
 
   def new
   	@comment = Comment.new(parent_id: params[:parent_id])
+    @comment.design_application_id = params[:design_application_id] if params[:design_application_id].present?
+    @comment.parent_id = params[:parent_id] if params[:parent_id].present?
   end
 
   def create
@@ -19,7 +21,11 @@ class CommentsController < ApplicationController
 
   	if @comment.save
   		flash[:success] = "Your comment was successfully added"
-  		redirect_to root_url
+      if @design_application.present?
+        redirect_to @design_application
+      else
+        redirect_to root_url
+      end
   	else
   		render 'new'
   	end
