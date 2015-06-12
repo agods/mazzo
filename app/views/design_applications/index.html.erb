@@ -1,0 +1,18 @@
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Image</th>
+		<th>Document</th>
+	</tr>
+	
+	<% @design_applications.each do |design_application| %>
+		<tr>
+			<td><%= design_application.name %></td>
+			<td><%= design_application.description %></td>
+			<td><%= link_to "Download", design_application.image.url(:original, false) %></td>
+			<td><%= link_to "Download", design_application.drawing.url(:original, false) %> </td>
+		</tr>
+	<% end %>
+
+</table>

@@ -1,0 +1,74 @@
+<p>
+  <strong>Name:</strong>
+  <%= @design_application.name %>
+</p>
+ 
+<p>
+  <strong>Address:</strong>
+  <%= @design_application.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @design_application.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @design_application.phone %>
+</p>
+
+<p>
+  <strong>Work Address:</strong>
+  <%= @design_application.work_address %>
+</p>
+
+<p>
+  <strong>Work Description:</strong>
+  <%= @design_application.description %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @design_application.start_date %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @design_application.end_date %>
+</p>
+
+<p>
+  <strong>Image</strong>
+  <%= link_to "Download", @design_application.image.url(:original, false) %>
+</p>
+
+<p>
+	<strong>Drawing</strong>
+	<%= link_to "Download", @design_application.drawing.url(:original, false) %>
+</p>
+
+<h1>New comment</h1>
+ 
+<% if @comment.parent %>
+  <%= render 'comments/form', comment: @comment.parent, from_reply_form: true %>
+<% end %>
+ 
+<%= render 'comments/form' %>
+
+<%= @design_application.comments.count %>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Title</th>
+    <th>Comment</th>
+    <th>Reply</th>
+  </tr>
+  <% @design_application.comments.each do |comments| %>
+  <tr>
+    <td><%= comments.title %></td>
+    <td><%= comments.body %></td>
+    <td><%= link_to 'reply', new_comment_path(:design_application_id => @design_application.id) %></td>
+  </tr>
+  <% end %>
+</table>

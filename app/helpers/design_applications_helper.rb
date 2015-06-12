@@ -1,0 +1,2 @@
+module DesignApplicationsHelper
+end
