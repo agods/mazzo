@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   	if @comment.save
   		flash[:success] = "Your comment was successfully added"
       if @design_application.present?
-        redirect_to @design_application
+        redirect_to design_application_path(@design_application, anchor: "comment_#{@comment.id}")
       else
         redirect_to root_url
       end

@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well", id=<%= "comment_#{comment.id}".html_safe %>>
   <h2><%= comment.title %></h2>
   <p class="text-muted">Added by <strong><%= comment.user.email %></strong> on
     <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %></p>
