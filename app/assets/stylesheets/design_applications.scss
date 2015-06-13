@@ -1,3 +1,12 @@
 // Place all the styles related to the DesignApplications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.highlighted{
+  background: rgb(184, 225, 252);
+  -webkit-transition: background 1.5s ease-in-out;
+  -moz-transition: background 1.5s ease-in-out;
+  -o-transition: background 1.5s ease-in-out;
+  transition: background 1.5s ease-in-out;
+  
+}
