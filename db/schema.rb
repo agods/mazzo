@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610183425) do
+ActiveRecord::Schema.define(version: 20150614210505) do
 
   create_table "comment_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20150610183425) do
     t.integer  "drawing_file_size"
     t.datetime "drawing_updated_at"
   end
+
+  create_table "neighbors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "design_application_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "neighbors", ["design_application_id"], name: "index_neighbors_on_design_application_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

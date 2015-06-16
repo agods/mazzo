@@ -26,6 +26,6 @@ class DesignApplicationsController < ApplicationController
   private
   	def design_application_params
   		params.require(:design_application).permit(:name, :address, :email, :phone, :work_address, :description,
-  		 :start_date, :end_date, :image, :drawing)
+  		 :start_date, :end_date, :image, :drawing, neighbors_attributes:[:id, :name, :address, :email, :phone, :_destroy])
   	end
 end
