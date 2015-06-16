@@ -14,13 +14,25 @@ class DesignApplicationsController < ApplicationController
   end
 
   def create
-	@design_application = DesignApplication.new(design_application_params)
+  	@design_application = DesignApplication.new(design_application_params)
 
-	if @design_application.save
-	  redirect_to @design_application
-	else
-	  render 'new'
-	end
+  	if @design_application.save
+  	  redirect_to @design_application
+  	else
+  	  render 'new'
+  	end
+  end
+
+  def upvote
+    @design_application = DesignApplication.find(params[:id])
+    @design_application.upvote_by current_user
+    redirect_to @design_application
+  end
+
+  def downvote
+    @link = Link.find(params[:id])
+    @link.downvote_by current_user
+    redirect_to links_path
   end
 
   private

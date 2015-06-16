@@ -11,6 +11,7 @@ gem 'paperclip'
 gem 'closure_tree'
 gem 'cocoon'
 gem 'simple_form'
+gem 'acts_as_votable'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

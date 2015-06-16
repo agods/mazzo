@@ -4,6 +4,9 @@
 		<th>Description</th>
 		<th>Image</th>
 		<th>Document</th>
+		<th>Vote</th>
+		<th>Voted For</th>
+		<th>Voted Against</th>
 	</tr>
 	
 	<% @design_applications.each do |design_application| %>
@@ -12,6 +15,11 @@
 			<td><%= design_application.description %></td>
 			<td><%= link_to "Download", design_application.image.url(:original, false) %></td>
 			<td><%= link_to "Download", design_application.drawing.url(:original, false) %> </td>
+			<td><%= link_to "upvote", like_design_application_path(design_application), method: :put %> <br>
+				<%= link_to "downvote", dislike_design_application_path(design_application), method: :put %>
+			</td>
+			<td><%= design_application.last.votes_for %></td>
+			<td><%= design_application.last.votes_for %></td>
 		</tr>
 	<% end %>
 
