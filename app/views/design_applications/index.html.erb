@@ -18,8 +18,13 @@
 			<td><%= link_to "upvote", like_design_application_path(design_application), method: :put %> <br>
 				<%= link_to "downvote", dislike_design_application_path(design_application), method: :put %>
 			</td>
-			<td><%= design_application.last.votes_for %></td>
-			<td><%= design_application.last.votes_for %></td>
+			
+				<td><ul><% design_application.votes_for.voters.each do |voter| %>
+						<li><%= voter.name %></li>
+					<% end %>
+					</td></ul>
+			
+			<td><%= design_application.votes_for %></td>
 		</tr>
 	<% end %>
 

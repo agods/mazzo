@@ -54,6 +54,17 @@
   <% end %>
 </ul>
 
+<h4>Votes For</h4>
+<ul><% @design_application.votes_for.up.voters.each do |voter| %>
+      <li><%= voter.name %></li>
+    <% end %>
+</ul>
+
+<h4>Votes Against</h4>
+<ul><% @design_application.votes_for.down.voters.each do |voter| %>
+      <li><%= voter.name %></li>
+    <% end %>
+</ul>
 <%= comments_tree_for @comments %>
 
 <hr />

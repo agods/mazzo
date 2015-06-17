@@ -30,9 +30,9 @@ class DesignApplicationsController < ApplicationController
   end
 
   def downvote
-    @link = Link.find(params[:id])
-    @link.downvote_by current_user
-    redirect_to links_path
+    @design_application = DesignApplication.find(params[:id])
+    @design_application.downvote_by current_user
+    redirect_to @design_application
   end
 
   private
