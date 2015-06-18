@@ -1,2 +1,33 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<div class="col-lg-12">
+	<h1>ARC Design Application</h1>
+	<p>To submit a design application for review, please follow the steps outlined below.</p>
+</div>
+<div class="row-spacer"></div>
+<div class="row">
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3><u>Step 1:</u> Read the Architectural Guidelines and Covenants</h3></div>
+			<div class="panel-body">The Covenants, Conditions and Restrictions (CC&Rs) contain important information as you develop your plans. Please make sure to review them carefully and reference the relevant information when submitting your application (e.g. how far is your fucking shed going to be from the fucking fenceline???). Sunrise CC&Rs can be downloaded <a href="http://sunrisemasterassociation.com/document_view.asp?id=138" target="_blank">here</a>.
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3><u>Step 2:</u> Review Your Plans with Impacted Property Owners</h3></div>
+			<div class="panel-body">Contact property owners that are adjacent and/or have a view of the proposed work. You will be asked to include the name, address, email and phone number of any impacted property owners. You do not need to seek their approval, but they should be made aware of your plans. Impacted property owners will be contacted by SMA and will be given a chance to voice any concerns about the application.
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3><u>Step 3:</u> Prepare Plans and Support Materials</h3></div>
+			<div class="panel-body">You will be asked to submit your plans as part of your design application. You can submit them in the form of an image or PDF. All plans should be complete and include all specifications. Please reference any relevant architectural guidelines to make sure your application can be properly reviewed. If you've already forgotten where the guidelines are you stupid fuck, go back to Step 1.
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="col-lg-12 text-center">
+	<p style="font-size: 30px;"><%= link_to "Submit ARC Design Application", new_design_application_path %></p>
+</div>
