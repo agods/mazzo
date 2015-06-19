@@ -1,6 +1,6 @@
 class DesignApplicationsController < ApplicationController
   def index
-  	@design_applications = DesignApplication.all
+  	@design_applications = DesignApplication.paginate(page: params[:page], :per_page => 5)
   end
 
   def show

@@ -1,24 +1,24 @@
-<table>
+<h1>ARC Design Application Inbox</h1>
+<br>
+<table class="table table-hover">
 	<tr>
 		<th>Name</th>
 		<th>Description</th>
-		<th>Image</th>
-		<th>Document</th>
-		<th>Vote</th>
+		<th>Votes For</th>
+		<th>Votes Against</th>
+		<th>Comments</th>
+        <th>Days Left to Vote</th>
 	</tr>
-	
 	<% @design_applications.each do |design_application| %>
 		<tr>
-			<td><%= design_application.name %></td>
-			<td><%= design_application.description %></td>
-			<td><%= link_to "Download", design_application.image.url(:original, false) %></td>
-			<td><%= link_to "Download", design_application.drawing.url(:original, false) %> </td>
-			<td><%= link_to "upvote", like_design_application_path(design_application), method: :put %> <br>
-				<%= link_to "downvote", dislike_design_application_path(design_application), method: :put %>
-			</td>
+			<td><%= link_to design_application.name, design_application_path(design_application) %></td>
+			<td style="width: 300px;"><%= truncate(design_application.description, length: 100) %></td>
+			<td><%= design_application.votes_for.up.count %></td>
+			<td><%= design_application.votes_for.down.count %></td>
+			<td><%= design_application.comments.count %></td>
+			<td><%= 30 - ((Time.now - design_application.created_at)/1.day).floor %></td>
 		</tr>
 	<% end %>
-
 </table>
 
-<%= link_to 'New', new_design_application_path %>
+<%= will_paginate %>
