@@ -17,7 +17,7 @@ class DesignApplicationsController < ApplicationController
   	@design_application = DesignApplication.new(design_application_params)
 
   	if @design_application.save
-  	  redirect_to @design_application
+  	  redirect_to root_path
   	else
   	  render 'new'
   	end
