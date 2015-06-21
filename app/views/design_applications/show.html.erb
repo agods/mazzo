@@ -1,74 +1,96 @@
-<p>
-  <strong>Name:</strong>
-  <%= @design_application.name %>
-</p>
- 
-<p>
-  <strong>Address:</strong>
-  <%= @design_application.address %>
-</p>
+<div>
+  <span style="font-size: 45px;">Application for <%= @design_application.name %></span>
+  <span class="pull-right" style="font-size: 30px; margin-top: 15px; margin-right: 15px;">
+    <span><%= link_to like_design_application_path, method: :put do %>
+            <i class="glyphicon glyphicon-thumbs-up" style="color: green;"></i></span>
+          <% end %>
+    <span>Vote For |</span>
+    <span><%= link_to dislike_design_application_path, method: :put do %>
+            <i class="glyphicon glyphicon-thumbs-down" style="color: red; font-size: 30px;"></i></span>
+          <% end %>
+    <span>Vote Against</span>
+  </span>
+</div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @design_application.email %>
-</p>
+<hr>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @design_application.phone %>
-</p>
+<div class="col-md-6">  
+  <div class="panel panel-primary">
+    <div class="panel-heading">Applicant Information</div>
+      <div class="panel-body">
+        <div><strong>Name: </strong><%= @design_application.name %></div>
+        <div><strong>Address: </strong><%= @design_application.address %></div>
+        <div><strong>Email: </strong><%= @design_application.email %></div>
+        <div><strong>Phone: </strong><%= @design_application.phone %></div>
+      </div>
+  </div>
+</div>
+<div class="col-md-6">  
+  <div class="panel panel-primary">
+    <div class="panel-heading">Proposal Information</div>
+      <div class="panel-body">
+        <div><strong>Address Where Work Will Be Perfomed: </strong><%= @design_application.work_address %></div>
+        <div><strong>Description of work: </strong><%= @design_application.description %></div>
+        <div><strong>Estimated Start Date: </strong><%= @design_application.start_date %></div>
+        <div><strong>Estimated End Date: </strong><%= @design_application.end_date %></div>
+        <% if @design_application.image.blank? %>
+          <div><strong>Image: </strong> No Attached Images </div>
+        <% else %>
+          <div><strong>Image: </strong><%= link_to "Download", @design_application.image.url(:original, false) %></div>
+        <% end %>
+         <% if @design_application.drawing.blank? %>
+          <div><strong>Drawing: </strong> No Attached Drawings </div>
+        <% else %>
+          <div><strong>Drawing: </strong><%= link_to "Download", @design_application.drawing.url(:original, false) %></div>
+        <% end %>
+      </div>
+  </div>
+</div>
+<div class="col-md-6">  
+  <div class="panel panel-primary">
+    <div class="panel-heading">Impacted Neighbors</div>
+      <div class="panel-body">
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+          </tr>
+          <% @design_application.neighbors.each do |neighbor| %>
+            <tr>
+              <td><%= neighbor.name %></td>
+              <td><%= neighbor.address %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+  </div>
+</div>
+<div class="col-md-6">  
+  <div class="panel panel-primary">
+    <div class="panel-heading">Board Member Voting</div>
+      <div class="panel-body">
+        <strong>Votes For (<%= @design_application.votes_for.up.count %>)</strong>
+        <ul><% @design_application.votes_for.up.voters.each do |voter| %>
+              <li><%= voter.name %></li>
+            <% end %>
+        </ul>
+        <hr>
+        <strong>Votes Against (<%= @design_application.votes_for.down.count %>)</strong>
+        <ul><% @design_application.votes_for.down.voters.each do |voter| %>
+              <li><%= voter.name %></li>
+            <% end %>
+        </ul>
+      </div>
+  </div>
+</div>
+<br>
+<h3>Comments</h3>
+<br>
+<div class="col-md-12">
+  <%= comments_tree_for @comments %>
 
-<p>
-  <strong>Work Address:</strong>
-  <%= @design_application.work_address %>
-</p>
+  <hr />
 
-<p>
-  <strong>Work Description:</strong>
-  <%= @design_application.description %>
-</p>
-
-<p>
-  <strong>Start Date:</strong>
-  <%= @design_application.start_date %>
-</p>
-
-<p>
-  <strong>End Date:</strong>
-  <%= @design_application.end_date %>
-</p>
-
-<p>
-  <strong>Image</strong>
-  <%= link_to "Download", @design_application.image.url(:original, false) %>
-</p>
-
-<p>
-	<strong>Drawing</strong>
-	<%= link_to "Download", @design_application.drawing.url(:original, false) %>
-</p>
-
-<ul>
-  <% @design_application.neighbors.each do |neighbor| %>
-    <li><%= neighbor.name %></li>
-  <% end %>
-</ul>
-
-<h4>Votes For</h4>
-<ul><% @design_application.votes_for.up.voters.each do |voter| %>
-      <li><%= voter.name %></li>
-    <% end %>
-</ul>
-
-<h4>Votes Against</h4>
-<ul><% @design_application.votes_for.down.voters.each do |voter| %>
-      <li><%= voter.name %></li>
-    <% end %>
-</ul>
-
-<%= comments_tree_for @comments %>
-
-<hr />
-
-<h1>New comment</h1>
-<%= render 'comments/form' %>
+  <h1>New comment</h1>
+  <%= render 'comments/form' %>
+</div>

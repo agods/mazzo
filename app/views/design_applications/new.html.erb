@@ -1,4 +1,4 @@
-<%= simple_form_for @design_application, :url => design_applications_path, :html => { :multipart => true } do |f| %>
+<%= simple_form_for @design_application, :url => design_applications_path, :html => { :multipart => true }, wrapper: :horizontal_form do |f| %>
   <%# Errors Code %>
   <div> 
     <% if @design_application.errors.any? %>
@@ -16,26 +16,35 @@
     <% end %>
   </div>
   <%# DA Questions %>
-  <div>
-    <%= f.input :name %>
-    <%= f.input :address %>
-    <%= f.input :email %>
-    <%= f.input :phone %>
-    <%= f.input :work_address %>
-    <%= f.input :description %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :image, as: :file %>
-    <%= f.input :drawing, as: :file %>
-    <h5>Add Impacted Neighbors</h5>
-    <div>
-      <%= f.simple_fields_for :neighbors do |neighbor| %>
-        <%= render 'neighbor_fields', :f => neighbor %>
-      <% end %>
-      <%= link_to_add_association 'add neighbor', f, :neighbors %>
+  <div class="col-md-12">
+    <h1>Create a New Design Application</h1>
+    <hr>
+    <div class="col-md-6"  style="border-right: thin solid #D2D6DB;">
+      <%= f.input :name, placeholder: 'Enter name' %><br><br>
+      <%= f.input :address, placeholder: 'Enter address' %><br><br>
+      <%= f.input :email, placeholder: 'Enter email' %><br><br>
+      <%= f.input :phone, placeholder: 'Enter phone number' %><br><br>
+      <%= f.input :work_address, placeholder: 'Address where will the work be performed' %><br><br>
+      <%= f.input :description, placeholder: 'Provide a detailed description of the work to be performed' %><br><br><br>
+      <%= f.input :start_date, as: :date, html5: true %><br><br>
+      <%= f.input :end_date, as: :date, html5: true %><br><br>
+      <%= f.input :image, as: :file %>
+      <%= f.input :drawing, as: :file %>
     </div>
-    <%= f.submit %>
+    <div class="col-md-6" style="margin-top: -25px;">
+      <h3>Impacted Neighbors</h3>
+      <div>
+        <%= f.simple_fields_for :neighbors do |neighbor| %>
+          <%= render 'neighbor_fields', :f => neighbor %>
+        <% end %>
+        <button type="button" class="btn btn-default">
+          <%= link_to_add_association 'Add Neighbor', f, :neighbors %>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <hr>
+      <%= f.button :submit %>
+    </div>
   </div> 
 <% end %>
- 
-<%= link_to 'Back', design_applications_path %>

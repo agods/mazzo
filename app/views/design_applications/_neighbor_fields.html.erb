@@ -1,7 +1,9 @@
 <div class='nested-fields'>
-	<%= f.input :name %>
-	<%= f.input :address %>
-	<%= f.input :email %>
-	<%= f.input :phone %>
-	<%= link_to_remove_association "remove neighbor", f %>
+	<%= f.input :name, placeholder: "Enter neighbor's name" %><br><br>
+	<%= f.input :address, placeholder: "Enter neighbor's address"  %><br><br>
+	<%= f.input :email, placeholder: "Enter neighbor's email"  %><br><br>
+	<%= f.input :phone, placeholder: "Enter neighbor's phone number"  %><br><br>
+	<button type="button" class="btn btn-danger" style="margin-bottom: 10px;">
+		<%= link_to_remove_association "Remove Neighbor", f %>
+	</button>
 </div>
