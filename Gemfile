@@ -13,6 +13,7 @@ gem 'cocoon'
 gem 'simple_form'
 gem 'acts_as_votable'
 gem 'will_paginate'
+gem 'date_validator'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
