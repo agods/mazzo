@@ -26,8 +26,8 @@
       <%= f.input :phone, placeholder: 'Enter phone number' %><br><br>
       <%= f.input :work_address, placeholder: 'Address where will the work be performed' %><br><br>
       <%= f.input :description, placeholder: 'Provide a detailed description of the work to be performed' %><br><br><br>
-      <%= f.input :start_date, as: :date, html5: true %><br><br>
-      <%= f.input :end_date, as: :date, html5: true %><br><br>
+      <%= f.input :start_date, as: :date, html5: true, label: 'Proposed Start Date' %><br><br>
+      <%= f.input :end_date, as: :date, html5: true, label: 'Proposed End Date' %><br><br>
       <%= f.input :image, as: :file %>
       <%= f.input :drawing, as: :file %>
     </div>

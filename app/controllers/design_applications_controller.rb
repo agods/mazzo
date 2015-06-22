@@ -1,4 +1,6 @@
 class DesignApplicationsController < ApplicationController
+  before_action :authenticate_user!, :except => [:create, :new, :show]
+
   def index
   	@design_applications = DesignApplication.paginate(page: params[:page], :per_page => 5)
   end
