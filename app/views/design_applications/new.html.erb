@@ -19,27 +19,20 @@
   <div class="col-md-12">
     <h1>Create a New Design Application</h1>
     <hr>
-    <div class="col-md-6"  style="border-right: thin solid #D2D6DB;">
-      <%= f.input :name, placeholder: 'Enter name' %><br><br>
-      <%= f.input :address, placeholder: 'Enter address' %><br><br>
-      <%= f.input :email, placeholder: 'Enter email' %><br><br>
-      <%= f.input :phone, placeholder: 'Enter phone number' %><br><br>
-      <%= f.input :work_address, placeholder: 'Address where will the work be performed' %><br><br>
-      <%= f.input :description, placeholder: 'Provide a detailed description of the work to be performed' %><br><br><br>
-      <%= f.input :start_date, as: :date, html5: true, label: 'Proposed Start Date' %><br><br>
-      <%= f.input :end_date, as: :date, html5: true, label: 'Proposed End Date' %><br><br>
-      <%= f.input :image, as: :file %>
-      <%= f.input :drawing, as: :file %>
+    <div class="col-md-6">
+      <%= f.input :name, label: 'Lot Number' %><br><br>
+      <%= f.input :tag_list, label: 'Categories' %><br><br>
+      <%= f.input :note, as: :text, label: 'Notes' %><br><br>
     </div>
-    <div class="col-md-6" style="margin-top: -25px;">
-      <h3>Impacted Neighbors</h3>
+    <div class="col-md-6" style=" border-left: thin solid #D2D6DB;">
+      <h3>Attach Files</h3>
       <div>
-        <%= f.simple_fields_for :neighbors do |neighbor| %>
-          <%= render 'neighbor_fields', :f => neighbor %>
-        <% end %>
-        <button type="button" class="btn btn-default">
-          <%= link_to_add_association 'Add Neighbor', f, :neighbors %>
-        </button>
+        <%= f.input :drawing, as: :file, label: 'ARC Application Attachment' %>
+        <%= f.input :image, as: :file, label: 'Add An Image' %>
+        <%= f.input :image_two, as: :file, label: 'Add Another Image' %>
+        <%= f.input :image_three, as: :file, label: 'Add Another Image' %>
+        <%= f.input :image_four, as: :file, label: 'Add Another Image' %>
+        <%= f.input :image_five, as: :file, label: 'Add Another Image' %>
       </div>
     </div>
     <div class="col-md-12">

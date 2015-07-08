@@ -20,46 +20,49 @@
       <div class="panel-heading">Applicant Information</div>
         <div class="panel-body">
           <div><strong>Name: </strong><%= @design_application.name %></div>
-          <div><strong>Categories: </strong><%= @design_application.tag_list %></div>
-          <div><strong>Notes: </strong><%= @design_application.note %></div>
+          <div><strong>Address: </strong><%= @design_application.address %></div>
+          <div><strong>Email: </strong><%= @design_application.email %></div>
+          <div><strong>Phone: </strong><%= @design_application.phone %></div>
         </div>
     </div>
   </div>
   <div class="col-md-6">  
     <div class="panel panel-primary">
-      <div class="panel-heading">Attached Files</div>
+      <div class="panel-heading">Proposal Information</div>
         <div class="panel-body">
-          <% if @design_application.drawing.blank? %>
-            <div><strong>Drawing: </strong> No ARC Application Attached </div>
-          <% else %>
-            <div><strong>Drawing: </strong><%= link_to "Download", @design_application.drawing.url(:original, false) %></div>
-          <% end %>
+          <div><strong>Address Where Work Will Be Perfomed: </strong><%= @design_application.work_address %></div>
+          <div><strong>Description of work: </strong><%= @design_application.description %></div>
+          <div><strong>Estimated Start Date: </strong><%= @design_application.start_date %></div>
+          <div><strong>Estimated End Date: </strong><%= @design_application.end_date %></div>
           <% if @design_application.image.blank? %>
             <div><strong>Image: </strong> No Attached Images </div>
           <% else %>
             <div><strong>Image: </strong><%= link_to "Download", @design_application.image.url(:original, false) %></div>
           <% end %>
-          <% if @design_application.image_two.blank? %>
-            <div><strong>Image: </strong> No Attached Images </div>
+           <% if @design_application.drawing.blank? %>
+            <div><strong>Drawing: </strong> No Attached Drawings </div>
           <% else %>
-            <div><strong>Image: </strong><%= link_to "Download", @design_application.image_two.url(:original, false) %></div>
+            <div><strong>Drawing: </strong><%= link_to "Download", @design_application.drawing.url(:original, false) %></div>
           <% end %>
-          <% if @design_application.image_three.blank? %>
-            <div><strong>Image: </strong> No Attached Images </div>
-          <% else %>
-            <div><strong>Image: </strong><%= link_to "Download", @design_application.image_three.url(:original, false) %></div>
-          <% end %>
-          <% if @design_application.image_four.blank? %>
-            <div><strong>Image: </strong> No Attached Images </div>
-          <% else %>
-            <div><strong>Image: </strong><%= link_to "Download", @design_application.image_four.url(:original, false) %></div>
-          <% end %>
-          <% if @design_application.image_five.blank? %>
-            <div><strong>Image: </strong> No Attached Images </div>
-          <% else %>
-            <div><strong>Image: </strong><%= link_to "Download", @design_application.image_five.url(:original, false) %></div>
-          <% end %>
-
+        </div>
+    </div>
+  </div>
+  <div class="col-md-6">  
+    <div class="panel panel-primary">
+      <div class="panel-heading">Impacted Neighbors</div>
+        <div class="panel-body">
+          <table class="table">
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+            </tr>
+            <% @design_application.neighbors.each do |neighbor| %>
+              <tr>
+                <td><%= neighbor.name %></td>
+                <td><%= neighbor.address %></td>
+              </tr>
+            <% end %>
+          </table>
         </div>
     </div>
   </div>
@@ -82,9 +85,9 @@
     </div>
   </div>
   <br>
+  <h3>Comments</h3>
   <br>
   <div class="col-md-12">
-    <h3>Comments</h3>
     <%= comments_tree_for @comments %>
 
     <hr />
