@@ -1,0 +1,5 @@
+<% if current_user.admin? %>
+	<%= render 'admin_dashboard' %>
+<% else %>
+	<h1>You are not an Admin</h1>
+<% end %>

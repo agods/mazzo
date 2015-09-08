@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
   	end
 
   	if @comment.save
+      @comment.notification.create(comment_id: @comment)
   		flash[:success] = "Your comment was successfully added"
       if @design_application.present?
         redirect_to design_application_path(@design_application, anchor: "comment_#{@comment.id}")

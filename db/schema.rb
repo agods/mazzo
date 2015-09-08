@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708052145) do
+ActiveRecord::Schema.define(version: 20150907223640) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
 
   create_table "comment_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
@@ -34,8 +51,8 @@ ActiveRecord::Schema.define(version: 20150708052145) do
     t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -61,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150708052145) do
     t.integer  "image_five_file_size"
     t.datetime "image_five_updated_at"
     t.text     "note"
+    t.boolean  "status",                   default: true, null: false
   end
 
   create_table "neighbors", force: :cascade do |t|
@@ -74,6 +92,15 @@ ActiveRecord::Schema.define(version: 20150708052145) do
   end
 
   add_index "neighbors", ["design_application_id"], name: "index_neighbors_on_design_application_id"
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "comment_id"
+    t.boolean  "read",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "notifications", ["comment_id"], name: "index_notifications_on_comment_id"
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

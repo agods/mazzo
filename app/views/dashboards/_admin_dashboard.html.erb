@@ -1,0 +1,12 @@
+<table class="table table-hover">
+	<tr>
+	<% @notifications.each do |notification| %>
+		<tr>
+			<td><%= notification.comment.user.name %> left a comment on
+			<%= notification.comment.design_application.name %>
+			<%= time_ago_in_words(notification.comment.created_at) %> ago </td>
+			<td><%= notification.read %></td>
+			<td><%= link_to "Remove", notification_path(notification, notification: {read: true}), method: :put %> </td>
+		</tr>
+	<% end %>
+</table>

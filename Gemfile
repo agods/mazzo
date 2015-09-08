@@ -15,6 +15,7 @@ gem 'acts_as_votable'
 gem 'will_paginate'
 gem 'date_validator'
 gem 'acts-as-taggable-on'
+gem 'public_activity'
 
 group :development, :test do
   gem 'byebug'
