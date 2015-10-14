@@ -2,6 +2,7 @@ class DashboardsController < ApplicationController
 
 	def index
 		@notifications = Notification.where(read: false)
+		@design_applications = DesignApplication.all
 	end
 
 	def update

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 	member do
 	    put "like", to: "design_applications#upvote"
 	    put "dislike", to: "design_applications#downvote"
+      put :approve, to: "design_applications#approve"
+      put :reject, to: "design_applications#reject"
 	end
   end
   

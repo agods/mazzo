@@ -1,0 +1,13 @@
+<p>You have <%= @notifications.count %> unread comments </p>
+<table class="table table-hover">
+	<tr>
+	<% @notifications.each do |notification| %>
+		<tr>
+			<td><%= notification.comment.user.name %> <%= link_to 'left a comment', design_application_path(notification.comment.design_application, anchor: "comment_#{notification.comment_id}") %> on
+			<%= notification.comment.design_application.name %>
+			<%= time_ago_in_words(notification.comment.created_at) %> ago </td>
+			<td><%= notification.read %></td>
+			<td><%= link_to "Remove", notification_path(notification, notification: {read: true}), method: :put %> </td>
+		</tr>
+	<% end %>
+</table>

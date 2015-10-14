@@ -1,12 +1,102 @@
-<table class="table table-hover">
-	<tr>
-	<% @notifications.each do |notification| %>
+<div class="row">
+	<h1>Admin Dashboard</h1>
+	<hr>
+</div>
+<div class="row">
+	<div class="col-lg-4 col-md-6">
+		<div class="panel panel-green">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="glyphicon glyphicon-plus-sign" style="font-size: 60px; color: white;"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge"><%= @design_applications.where(status: true).count %></div>
+						<div>Active Design Apps</div>
+					</div>
+				</div>
+			</div>
+			<%= link_to new_design_application_path, :action => 'go' do %>
+				<div class="panel-footer">
+					<span class="pull-left">Add New Design App</span>
+					<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-lg-4 col-md-6">
+		<div class="panel panel-yellow">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="glyphicon glyphicon-comment" style="font-size: 60px; color: white;"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge"><%= @notifications.count %></div>
+						<div>New Questions</div>
+					</div>
+				</div>
+			</div>
+			<%= link_to notifications_path, :action => 'go' do %>
+				<div class="panel-footer">
+					<span class="pull-left">View Questions</span>
+					<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-lg-4 col-md-6">
+		<div class="panel panel-red">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="glyphicon glyphicon-exclamation-sign" style="font-size: 60px; color: white;"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">26</div>
+						<div>Design Apps with Less than 5 Days</div>
+					</div>
+				</div>
+			</div>
+			<a href="#">
+				<div class="panel-footer">
+					<span class="pull-left">View Details</span>
+					<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<hr>
+<div>
+	<h1>Active ARC Design Applications</h1>
+	<br>
+	<table class="table table-hover">
 		<tr>
-			<td><%= notification.comment.user.name %> left a comment on
-			<%= notification.comment.design_application.name %>
-			<%= time_ago_in_words(notification.comment.created_at) %> ago </td>
-			<td><%= notification.read %></td>
-			<td><%= link_to "Remove", notification_path(notification, notification: {read: true}), method: :put %> </td>
+			<th>Name</th>
+			<th>Votes For</th>
+			<th>Votes Against</th>
+			<th>Comments</th>
+	        <th>Days Left to Vote</th>
+	        <th>Actions</th>
+	        <th>Approved</th>
 		</tr>
-	<% end %>
-</table>
+		<% @design_applications.where(status: true).each do |design_application| %>
+			<tr>
+				<td><%= link_to design_application.name, design_application_path(design_application) %></td>
+				<td><%= design_application.votes_for.up.count %></td>
+				<td><%= design_application.votes_for.down.count %></td>
+				<td><%= design_application.comments.count %></td>
+				<td><%= 30 - ((Time.now - design_application.created_at)/1.day).floor %></td>
+				<td><%= link_to "Approve", approve_design_application_path(design_application), method: :put %>
+					<%= link_to "Reject", reject_design_application_path(design_application), method: :put %>
+				</td>
+				<td><%= design_application.approved %></td>
+			</tr>
+		<% end %>
+	</table>
+
+</div>
