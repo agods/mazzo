@@ -16,6 +16,7 @@ gem 'will_paginate'
 gem 'date_validator'
 gem 'acts-as-taggable-on'
 gem 'public_activity'
+gem 'filterrific'
 
 group :development, :test do
   gem 'byebug'

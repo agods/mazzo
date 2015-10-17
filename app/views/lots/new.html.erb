@@ -1,0 +1,27 @@
+<%= simple_form_for(@lot) do |f| %>
+  <% if @lot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lot.errors.count, "error") %> prohibited this lot from being saved:</h2>
+ 
+      <ul>
+        <% @lot.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="col-md-12">
+    <h1>Create a New Design Application</h1>
+    <hr>
+    <%= f.input :name, label: 'Lot Number' %><br><br>
+    <div>
+      <%= f.simple_fields_for :design_applications, :design_applications do |design_application| %>
+        <%= render 'design_application_fields', :f => design_application %>
+      <% end %>
+    </div>
+    <div class="col-md-12">
+      <hr>
+      <%= f.button :submit %>
+    </div>
+  </div>
+<% end %>

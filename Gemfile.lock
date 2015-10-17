@@ -83,6 +83,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.6.0)
+    filterrific (2.0.5)
+      rails (>= 3.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -229,6 +231,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   date_validator
   devise
+  filterrific
   jbuilder (~> 2.0)
   jquery-rails
   paperclip
@@ -248,4 +251,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.10.3
+   1.10.6

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921021941) do
+ActiveRecord::Schema.define(version: 20151017053646) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -80,7 +80,19 @@ ActiveRecord::Schema.define(version: 20150921021941) do
     t.text     "note"
     t.boolean  "status",                   default: true, null: false
     t.boolean  "approved"
+    t.integer  "lot_id"
   end
+
+  add_index "design_applications", ["lot_id"], name: "index_design_applications_on_lot_id"
+
+  create_table "lots", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "design_application_id"
+  end
+
+  add_index "lots", ["design_application_id"], name: "index_lots_on_design_application_id"
 
   create_table "neighbors", force: :cascade do |t|
     t.string   "name"

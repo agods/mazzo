@@ -3,7 +3,21 @@ class DesignApplicationsController < ApplicationController
 
 
   def index
-  	@design_applications = DesignApplication.all
+  	@filterrific = initialize_filterrific(
+      DesignApplication,
+      params[:filterrific],
+      :select_options => {
+        sorted_by: DesignApplication.options_for_sorted_by,
+        with_status: DesignApplication.options_for_select,
+        with_approved: DesignApplication.options_for_select
+      }
+    ) or return
+    @design_applications = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -49,14 +63,20 @@ class DesignApplicationsController < ApplicationController
 
   def approve
     @design_application = DesignApplication.find(params[:id])
-    @design_application.update_attributes(approved: 1, status: 0)
-    redirect_to root_path, :notice => "Design App Approved."
+    if @design_application.update_attributes(approved: 1, status: 0)
+      redirect_to root_path, :notice => "Design App Approved."
+    else
+      redirect_to root_path, :alert => "Something went wrong."
+    end
   end
 
   def reject
     @design_application = DesignApplication.find(params[:id])
-    @design_application.update_attributes(approved: 0, status: 0)
-    redirect_to root_path, :notice => "Design App Rejected."
+    if @design_application.update_attributes(approved: 0, status: 0)
+      redirect_to root_path, :notice => "Design App Rejected."
+    else
+      redirect_to root_path, :notice => "Something went wrong"
+    end
   end
 
 

@@ -1,3 +1,64 @@
+<%= form_for_filterrific @filterrific do |f| %>
+  <div>
+    Search
+    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed'
+    ) %>
+  </div>
+  <div>
+    Status
+    <%= f.select(
+      :with_status,
+      @filterrific.select_options[:with_status],
+      { include_blank: '- Any -' }
+    ) %>
+  </div>
+  <div>
+    Approved
+    <%= f.select(
+      :with_approved,
+      @filterrific.select_options[:with_approved],
+      { include_blank: '- Any -' }
+    ) %>
+  </div>
+  <div>
+    Sorted by
+    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+  </div>
+  <div>
+    <%= link_to(
+      'Reset filters',
+      reset_filterrific_url,
+    ) %>
+  </div>
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
+
+<div id="filterrific_results">
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Approved</th>
+      <th>Tags</th>
+    </tr>
+    <% @design_applications.each do |design_application| %>
+      <tr>
+        <td><%= link_to design_application.name, design_application_path(design_application) %></td>
+        <td style="width: 300px;"><%= truncate(design_application.description, length: 100) %></td>
+        <td><%= design_application.status %></td>
+        <td><%= design_application.approved %></td>
+        <td><%= raw design_application.tag_list %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
 <h1>ARC Design Application Inbox</h1>
 <br>
 <table class="table table-hover">
@@ -11,14 +72,13 @@
 	</tr>
 	<% @design_applications.each do |design_application| %>
 		<tr>
-			<td><%= link_to design_application.name, design_application_path(design_application) %></td>
-			<td style="width: 300px;"><%= truncate(design_application.description, length: 100) %></td>
+			<td><%= link_to design_application.lot.name, design_application_path(design_application) %></td>
+			<td style="width: 300px;"><%= truncate(design_application.note, length: 100) %></td>
 			<td><%= design_application.votes_for.up.count %></td>
 			<td><%= design_application.votes_for.down.count %></td>
 			<td><%= design_application.comments.count %></td>
 			<td><%= 30 - ((Time.now - design_application.created_at)/1.day).floor %></td>
+      <td><%= raw design_application.tag_list %></td>
 		</tr>
 	<% end %>
 </table>
-
-<%= will_paginate %>

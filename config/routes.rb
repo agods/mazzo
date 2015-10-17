@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'lots/new'
+
+  get 'lots/create'
+
   get 'notifications/index'
 
   get 'notifications/create'
@@ -34,5 +38,6 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:index, :show]
   resources :dashboards
+  resources :lots
 
 end
